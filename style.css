@@ -1,0 +1,425 @@
+/* Import Google Fonts and Font Awesome for Icons */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lato:wght@300;400;700&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  --gap: 5em;
+  --line: 1px;
+  --color: rgba(255, 255, 255, 0.2);
+
+  background-image: linear-gradient(
+      -90deg,
+      transparent calc(var(--gap) - var(--line)),
+      var(--color) calc(var(--gap) - var(--line) + 1px),
+      var(--color) var(--gap)
+    ),
+    linear-gradient(
+      0deg,
+      transparent calc(var(--gap) - var(--line)),
+      var(--color) calc(var(--gap) - var(--line) + 1px),
+      var(--color) var(--gap)
+    );
+  background-size: var(--gap) var(--gap);
+  color: #333;
+}
+
+.container {
+  width: 50%;
+  background-color: rgba(255, 255, 255, 0.1); /* Light transparent */
+  backdrop-filter: blur(10px); /* Blur to create glass effect */
+  padding: 2rem;
+  color: #fff;
+  margin: 4rem auto;
+  border-radius: 20px; /* More rounded corners */
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Softer, larger shadow */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1.2s ease forwards;
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle glass border */
+}
+
+/* Updated animation for smooth entrance */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.weather_header {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.search-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 35px;
+}
+
+/* Input styles with transitions */
+.input {
+  max-width: 190px;
+  height: 100%;
+  outline: none;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: rgba(255, 255, 255, 0.1); /* Light glass effect */
+  backdrop-filter: blur(5px); /* Subtle blur */
+  caret-color: #f7f7f8;
+  color: #fff;
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+  margin-right: 1px;
+  transition: all 0.4s ease; /* Smooth transition for hover and focus */
+}
+
+.input:hover {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.15); /* Lighten background on hover */
+}
+
+.input:focus {
+  border: 2px solid #a970ff;
+  background-color: rgba(0, 0, 0, 0.5); /* Darker for focus */
+  box-shadow: 0 0 10px rgba(169, 112, 255, 0.5); /* Add focus glow */
+}
+
+/* Enhanced button with transition */
+.search__btn {
+  border: none;
+  cursor: pointer;
+  background-color: rgba(42, 42, 45, 0.6); /* Semi-transparent for glass */
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  height: 100%;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.4s ease, transform 0.2s ease; /* Add smooth transition */
+}
+
+.search__btn:hover {
+  background-color: rgba(54, 54, 56, 0.8);
+  transform: translateY(-2px); /* Slight lift on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow on hover */
+}
+
+.weather_info {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  background-color: rgba(255, 255, 255, 0.1); /* Transparent for glass */
+  padding: 1rem;
+  border-radius: 10px;
+  backdrop-filter: blur(10px); /* Add blur for the glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border for glass */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced 3D Lift Animation with smooth transitions */
+.weather_card {
+  background-color: rgba(255, 255, 255, 0.1); /* Glass effect */
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 1.5rem;
+  width: calc(50% - 1rem);
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Softer shadow */
+  transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smoother */
+}
+
+.weather_card:hover {
+  transform: translateY(-10px); /* Higher 3D lift */
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3); /* More intense shadow */
+}
+
+.weather_card i {
+  font-size: 30px;
+  margin-right: 1rem;
+  transition: transform 0.4s ease;
+}
+
+.weather_card:hover i {
+  transform: rotate(15deg); /* More rotation for hover */
+}
+
+.weather_card p {
+  margin: 0;
+  text-align: right;
+}
+
+/* Adjusted hover effects for smaller screens */
+@media (max-width: 768px) {
+  .weather_card:hover {
+    transform: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .weather_card:hover i {
+    transform: none;
+  }
+
+  .container {
+    width: 90%;
+    padding: 1rem;
+  }
+
+  .weather_info {
+    flex-direction: column;
+  }
+
+  .weather_card {
+    width: 100%;
+    height: 70px;
+  }
+}
+
+.weather_body {
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+  padding: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.1); /* Glass effect */
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* Slightly softer shadow */
+  font-family: "Roboto", sans-serif;
+  color: #fff; /* Change color to white for better contrast */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+}
+
+.weather_body:hover {
+  transform: translateY(-8px); /* Subtle movement */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); /* Slightly bigger shadow */
+}
+
+.weather_city {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  color: #fff;
+}
+
+.weather_date_time {
+  font-size: 13px;
+  color: #bbb;
+  margin-bottom: 0.4rem;
+}
+
+.weather_data {
+  display: flex;
+  justify-content: center;  /* Center the content */
+  align-items: center;      /* Vertically center the icon and forecast text */
+  margin-bottom: 0.4rem;
+  flex-direction: column;   /* Stack the forecast and icon vertically */
+}
+
+.weather_forecast {
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  background-color: rgba(105, 163, 255, 0.7); /* Semi-transparent */
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 50px;
+  text-align: center;
+  margin-bottom: 1rem;  /* Add some space between the text and the icon */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a slight shadow for better visibility */
+}
+
+.weather_icon {
+  font-size: 40px;
+  color: rgba(105, 163, 255, 0.8);
+  margin: 0 auto;  /* Center the icon */
+}
+
+/* Custom styles for the weather icon */
+.weather_icon img {
+    width: 80px;   /* Set the size of the icon */
+    height: 80px;
+    background-color: rgba(255, 255, 255, 0.2); /* Subtle glass-like background */
+    border-radius: 10px; /* Rounded corners */
+    border: 2px solid rgba(255, 255, 255, 0.3); /* Add a border for better visibility */
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  /* Add a shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+}
+
+/* On hover, slightly enlarge the icon and increase the shadow */
+.weather_icon img:hover {
+    transform: scale(1.1); /* Slight zoom-in on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
+}
+
+.weather_temperate {
+  font-size: 40px;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 0.4rem;
+}
+
+.weather_minmax {
+  display: flex;
+  justify-content: space-around;
+  font-size: 14px;
+  color: #bbb;
+}
+
+.weather_min,
+.weather_max {
+  font-weight: 500;
+}
+/* Already present code */
+
+/* Adjusted hover effects for smaller screens */
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+    padding: 1rem;
+  }
+
+  .weather_info {
+    flex-direction: column;
+  }
+
+  .weather_card {
+    width: 100%;
+    height: 70px;
+  }
+
+  .weather_card i {
+    font-size: 24px;  /* Reduce icon size */
+  }
+
+  .weather_body {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .weather_city {
+    font-size: 18px; /* Reduce city font size */
+  }
+
+  .weather_temperate {
+    font-size: 32px; /* Reduce temperature font size */
+  }
+
+  .weather_forecast {
+    font-size: 12px; /* Reduce forecast font size */
+    padding: 0.2rem 0.8rem; /* Adjust padding */
+  }
+
+  .weather_icon img {
+    width: 60px; /* Reduce icon size */
+    height: 60px;
+  }
+}
+
+/* Loader styles */
+.cssloader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000; /* Make sure it's on top of other elements */
+  display: none; /* Initially hidden */
+  text-align: center;
+}
+
+.triangle1 {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 50px 50px 0 0;
+  border-color: #8086e0 transparent transparent transparent;
+  margin: 0 auto;
+  animation: shk1 1s ease-in-out infinite normal;
+}
+
+.triangle2 {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 50px 50px;
+  border-color: transparent transparent #6554b388 transparent;
+  margin: -50px auto 0;
+  animation: shk2 1s ease-in-out infinite alternate;
+}
+
+@keyframes shk1 {
+  0% {
+    transform: rotate(-360deg);
+  }
+
+  100% {
+  }
+}
+
+@keyframes shk2 {
+  0% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+  }
+}
+
+.text {
+  color: #949494;
+  margin: 30px auto;
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: 4px;
+}
+/* Style for the Location Button */
+.location-btn {
+  background-color: blue; /* Red background color */
+  border: none; /* Remove border */
+  color: white; /* Icon color */
+  padding: 10px 15px; /* Padding for the button */
+  font-size: 22px; /* Icon size */
+  border-radius: 50%; /* Make the button round */
+  cursor: pointer; /* Show hand cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth background transition */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover Effect for the Location Button */
+.location-btn:hover {
+  background-color: #333; /* Darker red on hover */
+}
+
+
+
+
